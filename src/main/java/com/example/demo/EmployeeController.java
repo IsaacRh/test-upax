@@ -71,4 +71,10 @@ public class EmployeeController {
 		return true;
 	}
 	
+	@PostMapping("/get_employees")
+	boolean getEmployes(@RequestBody JSONObject inputJsonObj) throws URISyntaxException {
+		String jobId = (String) inputJsonObj.get("job_id");
+	   return true; 
+	}
+	
 }
