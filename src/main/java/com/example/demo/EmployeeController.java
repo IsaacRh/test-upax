@@ -25,12 +25,14 @@ public class EmployeeController {
 	private final EmployeeRepository employeeRepository;
 	private final GenderRepository genderRepository;
 	private final JobRepository jobRepository;
+	private final EmployeeWorkedHoursRepository employeeWorkedHoursRepository;
 	
 	public EmployeeController(EmployeeRepository employeeRepository, GenderRepository genderRepository,
-			JobRepository jobRepository) {
+			JobRepository jobRepository, EmployeeWorkedHoursRepository employeeWorkedHoursRepository) {
        this.employeeRepository = employeeRepository;
        this.genderRepository = genderRepository;
        this.jobRepository = jobRepository;
+       this.employeeWorkedHoursRepository = employeeWorkedHoursRepository;
        
    }
 	
@@ -48,11 +50,11 @@ public class EmployeeController {
         System.out.println(genderId);
         System.out.println(jobId);
         Gender gender = genderRepository.findById(Long.parseLong(genderId)).orElseThrow( () -> new GenderNotFoundException(Long.parseLong(genderId)));;
-        Job job = jobRepository.findById(Long.parseLong(jobId)).orElseThrow( () -> new JobNotFoundException(Long.parseLong(genderId)));;
+        //Job job = jobRepository.findById(Long.parseLong(jobId)).orElseThrow( () -> new JobNotFoundException(Long.parseLong(jobId)));;
        
         Employee employee = new Employee(name, lastName, birthday);
         employee.setGender(gender);
-        employee.setJob(job);
+        // employee.setJob(job);
         employeeRepository.save(employee);
         
         return true;
@@ -67,13 +69,29 @@ public class EmployeeController {
 	    String employeeId = (String) inputJsonObj.get("employee_id");
 	    Employee employee = employeeRepository.findById(Long.parseLong(employeeId)).orElseThrow( () -> new JobNotFoundException(Long.parseLong(employeeId)));;
 	    EmployeeWorkedHours employeeWorked = new EmployeeWorkedHours(Double.parseDouble(worked_hours), worked_date);
-	    employeeWorked.setEmploye(null);
+	    employeeWorked.setEmploye(employee);
+	    employeeWorkedHoursRepository.save(employeeWorked);
 		return true;
 	}
 	
 	@PostMapping("/get_employees")
 	boolean getEmployes(@RequestBody JSONObject inputJsonObj) throws URISyntaxException {
 		String jobId = (String) inputJsonObj.get("job_id");
+	   return true; 
+	}
+	
+	@PostMapping("/total_worked_hours")
+	boolean getTotalWorkedHours(@RequestBody JSONObject inputJsonObj) throws URISyntaxException {
+		String startDate = (String) inputJsonObj.get("start_date");
+	    String endDate = (String) inputJsonObj.get("end_date");
+	   return true; 
+	}
+	
+	@PostMapping("/total_payment")
+	boolean getTotalPayment(@RequestBody JSONObject inputJsonObj) throws URISyntaxException {
+		String employeeId = (String) inputJsonObj.get("employee_id");
+		String startDate = (String) inputJsonObj.get("start_date");
+	    String endDate = (String) inputJsonObj.get("end_date");
 	   return true; 
 	}
 	
