@@ -1,5 +1,7 @@
 package com.example.demo;
 
+
+
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -21,10 +23,10 @@ public class Employee {
     private Long id;
     private String name;
     private String lastName;
-    private String birthdate;
+    private Date birthdate;
     
     public Employee() {}
-    public Employee(String name,  String lastName, String birthdate) { 
+    public Employee(String name,  String lastName, Date birthdate) { 
     	this.name = name;
     	this.lastName = lastName;
     	this.birthdate = birthdate;
@@ -68,10 +70,10 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
     

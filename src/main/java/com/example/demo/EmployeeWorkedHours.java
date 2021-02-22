@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,10 +19,10 @@ public class EmployeeWorkedHours {
     @GeneratedValue
     private Long id;
     private double workedHours;
-    private String workedDate;
+    private Date workedDate;
     
     public EmployeeWorkedHours() {}
-    public EmployeeWorkedHours(double workedHours,  String workedDate) { 
+    public EmployeeWorkedHours(double workedHours,  Date workedDate) { 
     	this.workedHours = workedHours;
     	this.workedDate = workedDate;
     }
@@ -41,10 +43,10 @@ public class EmployeeWorkedHours {
 	public void setWorkedHours(double workedHours) {
 		this.workedHours = workedHours;
 	}
-	public String getWorkedDate() {
+	public Date getWorkedDate() {
 		return workedDate;
 	}
-	public void setWorkedDate(String workedDate) {
+	public void setWorkedDate(Date workedDate) {
 		this.workedDate = workedDate;
 	}
 	public Employee getEmploye() {
